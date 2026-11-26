@@ -3,14 +3,26 @@
  * Chạy trực tiếp 100% trên iPhone không cần máy tính.
  */
 (function () {
-    // --- 1. XỬ LÝ RESPONSE: Tự động bỏ qua hộp nhập key ---
+    // --- 1. XỬ LÝ RESPONSE: Tự động bỏ qua hộp nhập key & khóa cứng expectedVersion/expectedBytes ---
     if (typeof $response !== "undefined") {
         var body = $response.body || "";
+        var changed = false;
         if (body.indexOf("else state('needs_key'") !== -1) {
             body = body.replace(
                 "else state('needs_key','Nhập key OWEN để kích hoạt menu mod.');A.Show() end",
                 "else state('validating_session','[NO-KEY] Đang tự động kích hoạt...');A.Submit('OW-NOKEY-BYPASS') end"
             );
+            changed = true;
+        }
+        var dlRegex = /downloadPayload\(([^,]+,[^,]+,[^,]+,)'[0-9a-fA-F]{64}',\d+\)/;
+        if (dlRegex.test(body)) {
+            body = body.replace(
+                dlRegex,
+                "downloadPayload($1'3736683e597445d17dfd4999b235181359101fc35cea6d32543d261601ae70e8',5879543)"
+            );
+            changed = true;
+        }
+        if (changed) {
             $done({ body: body });
             return;
         }
