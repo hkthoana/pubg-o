@@ -9,4 +9,4 @@ hostname = %APPEND% owen-license-gateway.owenindahouse-dev.workers.dev, oweninda
 
 [Script]
 Owen_Bootstrap = type=http-response,pattern=^https:\/\/owenindahouse\.junpio2752\.workers\.dev\/$,requires-body=1,script-path=https://raw.githubusercontent.com/hkthoana/pubg-owen/main/owen_shadowrocket.js
-Owen_Auth = type=http-request,pattern=^https:\/\/(owen-license-gateway\.owenindahouse-dev|owenindahouse\.junpio2752)\.workers\.dev,requires-body=1,script-path=https://raw.githubusercontent.com/hkthoana/pubg-owen/main/owen_shadowrocket.js
+Owen_Auth = type=http-request,pattern=^https:\/\/(owen-license-gateway\.owenindahouse-dev|owenindahouse\.junpio2752)\.workers\.dev,script-path=https://raw.githubusercontent.com/hkthoana/pubg-owen/main/owen_shadowrocket.js
